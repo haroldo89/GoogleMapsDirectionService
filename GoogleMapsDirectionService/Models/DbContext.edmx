@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProtektoTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="LocationPoint">
+          <Key>
+            <PropertyRef Name="LocationPoinId" />
+          </Key>
+          <Property Name="LocationPoinId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Radius" Type="int" Nullable="false" />
+          <Property Name="GeoInfo" Type="geography" Nullable="false" />
+          <Property Name="GeoInfoText" Type="varchar(max)" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="RouteId" />
+          </Key>
+          <Property Name="RouteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="GeoInfo" Type="geography" Nullable="false" />
+          <Property Name="GeoInfoText" Type="varchar(max)" Nullable="false" />
+          <Property Name="DeparturePointId" Type="int" />
+          <Property Name="ArrivalPointId" Type="int" />
+        </EntityType>
+        <EntityType Name="RouteDetail">
+          <Key>
+            <PropertyRef Name="RouteDetailId" />
+          </Key>
+          <Property Name="RouteDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="GeoInfo" Type="geography" Nullable="false" />
+          <Property Name="GeoInfoText" Type="varchar(max)" Nullable="false" />
+          <Property Name="DeparturePointId" Type="int" />
+          <Property Name="ArrivalPointId" Type="int" />
+          <Property Name="RouteId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ProtektoTest.dbo.ViewRoute' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewRoute">
+          <Key>
+            <PropertyRef Name="RouteId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="GeoInfoText" />
+            <PropertyRef Name="TimeStamp" />
+          </Key>
+          <Property Name="RouteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="GeoInfoText" Type="varchar(max)" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_RouteDetail_To_LocationPoint_Arrival">
+          <End Role="LocationPoint" Type="Self.LocationPoint" Multiplicity="0..1" />
+          <End Role="RouteDetail" Type="Self.RouteDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationPoint">
+              <PropertyRef Name="LocationPoinId" />
+            </Principal>
+            <Dependent Role="RouteDetail">
+              <PropertyRef Name="ArrivalPointId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RouteDetail_To_LocationPoint_Departure">
+          <End Role="LocationPoint" Type="Self.LocationPoint" Multiplicity="0..1" />
+          <End Role="RouteDetail" Type="Self.RouteDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationPoint">
+              <PropertyRef Name="LocationPoinId" />
+            </Principal>
+            <Dependent Role="RouteDetail">
+              <PropertyRef Name="DeparturePointId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RouteDetail_To_Route">
+          <End Role="Route" Type="Self.Route" Multiplicity="0..1" />
+          <End Role="RouteDetail" Type="Self.RouteDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="RouteId" />
+            </Principal>
+            <Dependent Role="RouteDetail">
+              <PropertyRef Name="RouteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spCreateRoute" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="routeName" Type="varchar" Mode="In" />
+          <Parameter Name="routeLineString" Type="varchar(max)" Mode="In" />
+          <Parameter Name="resultMessage" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="spGetRoutes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="ProtektoTestModelStoreContainer">
+          <EntitySet Name="LocationPoint" EntityType="Self.LocationPoint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Route" EntityType="Self.Route" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RouteDetail" EntityType="Self.RouteDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ViewRoute" EntityType="Self.ViewRoute" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewRoute].[RouteId] AS [RouteId], 
+    [ViewRoute].[Name] AS [Name], 
+    [ViewRoute].[GeoInfoText] AS [GeoInfoText], 
+    [ViewRoute].[TimeStamp] AS [TimeStamp]
+    FROM [dbo].[ViewRoute] AS [ViewRoute]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_RouteDetail_To_LocationPoint_Arrival" Association="Self.FK_RouteDetail_To_LocationPoint_Arrival">
+            <End Role="LocationPoint" EntitySet="LocationPoint" />
+            <End Role="RouteDetail" EntitySet="RouteDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RouteDetail_To_LocationPoint_Departure" Association="Self.FK_RouteDetail_To_LocationPoint_Departure">
+            <End Role="LocationPoint" EntitySet="LocationPoint" />
+            <End Role="RouteDetail" EntitySet="RouteDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RouteDetail_To_Route" Association="Self.FK_RouteDetail_To_Route">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="RouteDetail" EntitySet="RouteDetail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProtektoTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ProtektoTestEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="spCreateRoute">
+            <Parameter Name="routeName" Mode="In" Type="String" />
+            <Parameter Name="routeLineString" Mode="In" Type="String" />
+            <Parameter Name="resultMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="LocationPoint" EntityType="ProtektoTestModel.LocationPoint" />
+          <EntitySet Name="RouteDetail" EntityType="ProtektoTestModel.RouteDetail" />
+          <AssociationSet Name="FK_RouteDetail_To_LocationPoint_Arrival" Association="ProtektoTestModel.FK_RouteDetail_To_LocationPoint_Arrival">
+            <End Role="LocationPoint" EntitySet="LocationPoint" />
+            <End Role="RouteDetail" EntitySet="RouteDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RouteDetail_To_LocationPoint_Departure" Association="ProtektoTestModel.FK_RouteDetail_To_LocationPoint_Departure">
+            <End Role="LocationPoint" EntitySet="LocationPoint" />
+            <End Role="RouteDetail" EntitySet="RouteDetail" />
+          </AssociationSet>
+          <FunctionImport Name="spGetRoutes" EntitySet="ViewRoute" ReturnType="Collection(ProtektoTestModel.ViewRoute)" />
+          <EntitySet Name="Route" EntityType="ProtektoTestModel.Route" />
+          <EntitySet Name="ViewRoute" EntityType="ProtektoTestModel.ViewRoute" />
+          <AssociationSet Name="FK_RouteDetail_To_Route" Association="ProtektoTestModel.FK_RouteDetail_To_Route">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="RouteDetail" EntitySet="RouteDetail" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="LocationPoint">
+          <Key>
+            <PropertyRef Name="LocationPoinId" />
+          </Key>
+          <Property Name="LocationPoinId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Radius" Type="Int32" Nullable="false" />
+          <Property Name="GeoInfo" Type="Geography" Nullable="false" />
+          <Property Name="GeoInfoText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <NavigationProperty Name="RouteDetail" Relationship="ProtektoTestModel.FK_RouteDetail_To_LocationPoint_Arrival" FromRole="LocationPoint" ToRole="RouteDetail" />
+          <NavigationProperty Name="RouteDetail1" Relationship="ProtektoTestModel.FK_RouteDetail_To_LocationPoint_Departure" FromRole="LocationPoint" ToRole="RouteDetail" />
+        </EntityType>
+        <EntityType Name="RouteDetail">
+          <Key>
+            <PropertyRef Name="RouteDetailId" />
+          </Key>
+          <Property Name="RouteDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="GeoInfo" Type="Geography" Nullable="false" />
+          <Property Name="GeoInfoText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DeparturePointId" Type="Int32" />
+          <Property Name="ArrivalPointId" Type="Int32" />
+          <Property Name="RouteId" Type="Int32" />
+          <NavigationProperty Name="LocationPoint" Relationship="ProtektoTestModel.FK_RouteDetail_To_LocationPoint_Arrival" FromRole="RouteDetail" ToRole="LocationPoint" />
+          <NavigationProperty Name="LocationPoint1" Relationship="ProtektoTestModel.FK_RouteDetail_To_LocationPoint_Departure" FromRole="RouteDetail" ToRole="LocationPoint" />
+          <NavigationProperty Name="Route" Relationship="ProtektoTestModel.FK_RouteDetail_To_Route" FromRole="RouteDetail" ToRole="Route" />
+        </EntityType>
+        <Association Name="FK_RouteDetail_To_LocationPoint_Arrival">
+          <End Type="ProtektoTestModel.LocationPoint" Role="LocationPoint" Multiplicity="0..1" />
+          <End Type="ProtektoTestModel.RouteDetail" Role="RouteDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationPoint">
+              <PropertyRef Name="LocationPoinId" />
+            </Principal>
+            <Dependent Role="RouteDetail">
+              <PropertyRef Name="ArrivalPointId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RouteDetail_To_LocationPoint_Departure">
+          <End Type="ProtektoTestModel.LocationPoint" Role="LocationPoint" Multiplicity="0..1" />
+          <End Type="ProtektoTestModel.RouteDetail" Role="RouteDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocationPoint">
+              <PropertyRef Name="LocationPoinId" />
+            </Principal>
+            <Dependent Role="RouteDetail">
+              <PropertyRef Name="DeparturePointId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="RouteId" />
+          </Key>
+          <Property Name="RouteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="GeoInfo" Type="Geography" Nullable="false" />
+          <Property Name="GeoInfoText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DeparturePointId" Type="Int32" />
+          <Property Name="ArrivalPointId" Type="Int32" />
+          <NavigationProperty Name="RouteDetail" Relationship="ProtektoTestModel.FK_RouteDetail_To_Route" FromRole="Route" ToRole="RouteDetail" />
+        </EntityType>
+        <EntityType Name="ViewRoute">
+          <Key>
+            <PropertyRef Name="RouteId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="GeoInfoText" />
+            <PropertyRef Name="TimeStamp" />
+          </Key>
+          <Property Name="RouteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="GeoInfoText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_RouteDetail_To_Route">
+          <End Type="ProtektoTestModel.Route" Role="Route" Multiplicity="0..1" />
+          <End Type="ProtektoTestModel.RouteDetail" Role="RouteDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="RouteId" />
+            </Principal>
+            <Dependent Role="RouteDetail">
+              <PropertyRef Name="RouteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProtektoTestModelStoreContainer" CdmEntityContainer="ProtektoTestEntities" >
+          <FunctionImportMapping FunctionImportName="spCreateRoute" FunctionName="ProtektoTestModel.Store.spCreateRoute" />
+          <EntitySetMapping Name="LocationPoint">
+            <EntityTypeMapping TypeName="ProtektoTestModel.LocationPoint">
+              <MappingFragment StoreEntitySet="LocationPoint">
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="GeoInfoText" ColumnName="GeoInfoText" />
+                <ScalarProperty Name="GeoInfo" ColumnName="GeoInfo" />
+                <ScalarProperty Name="Radius" ColumnName="Radius" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LocationPoinId" ColumnName="LocationPoinId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RouteDetail">
+            <EntityTypeMapping TypeName="ProtektoTestModel.RouteDetail">
+              <MappingFragment StoreEntitySet="RouteDetail">
+                <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+                <ScalarProperty Name="ArrivalPointId" ColumnName="ArrivalPointId" />
+                <ScalarProperty Name="DeparturePointId" ColumnName="DeparturePointId" />
+                <ScalarProperty Name="GeoInfoText" ColumnName="GeoInfoText" />
+                <ScalarProperty Name="GeoInfo" ColumnName="GeoInfo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RouteDetailId" ColumnName="RouteDetailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spGetRoutes" FunctionName="ProtektoTestModel.Store.spGetRoutes">
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Route">
+            <EntityTypeMapping TypeName="ProtektoTestModel.Route">
+              <MappingFragment StoreEntitySet="Route">
+                <ScalarProperty Name="ArrivalPointId" ColumnName="ArrivalPointId" />
+                <ScalarProperty Name="DeparturePointId" ColumnName="DeparturePointId" />
+                <ScalarProperty Name="GeoInfoText" ColumnName="GeoInfoText" />
+                <ScalarProperty Name="GeoInfo" ColumnName="GeoInfo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewRoute">
+            <EntityTypeMapping TypeName="ProtektoTestModel.ViewRoute">
+              <MappingFragment StoreEntitySet="ViewRoute">
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="GeoInfoText" ColumnName="GeoInfoText" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

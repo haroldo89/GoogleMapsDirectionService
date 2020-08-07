@@ -1,0 +1,72 @@
+﻿<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    #map {
+        padding-top: 10px;
+        height: 90%;
+    }
+
+    #floating-panel {
+        position: absolute;
+        top: 55px;
+        right: 10px;
+        z-index: 5;
+        background-color: #fff;
+        padding: 15px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+    }
+
+    #warnings-panel {
+        position: absolute;
+        top: 55px;
+        left: 10px;
+        width: 30%;
+        height: 110px;
+        z-index: 6;
+        background-color: #fff;
+        text-align: center;
+    }
+
+    #instructions-panel {
+        position: absolute;
+        top: 170px;
+        left: 10px;
+        width: 30%;
+        height: 35%;
+        z-index: 6;
+        background-color: #fff;
+    }
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALkZJIHgyhQHkSj_tFsqby8M6V_XWk0sI&libraries=geometry"></script>
+<script src="~/Scripts/CustomControls/epolys.js"></script>
+<script src="~/Scripts/CustomControls/GoogleMapsDistanceHelper.js"></script>
+<script src="~/Scripts/CustomControls/GoogleMapsHelper.js"></script>
+<script src="~/Scripts/Views/Home/DynamicDirectionService.js"></script>
+<script>
+    $(document).ready(function () {
+        DirectionsService.initializeComponents();
+        $("#ulHeaderMenu > li").removeClass("active");
+        $("#lnkHome").addClass("active");
+    });
+</script>
+<div id="floating-panel">
+    <input type="text" id="txtRouteName" name="" placeholder="Nombre Ruta" style="height:35px" />
+    <input type="submit" id="btnSearch" value="Buscar" />
+    <input type="submit" id="btnSaveRoute" value="Guardar" />
+    <input type="submit" id="btnClearMap" value="Limpiar" />
+    <div id="tripGeneralInfo">
+    </div>
+</div>
+<div id="warnings-panel" style="border: 1px solid blue;">
+    <div id="warnings-panel-content" style="height:100px; overflow: auto;"></div>
+</div>
+<div id="instructions-panel" style="height:200px; overflow:auto; padding:15px; border: 1px solid blue;">
+</div>
+<div id="map" style="height:100%;width:100%;"></div>

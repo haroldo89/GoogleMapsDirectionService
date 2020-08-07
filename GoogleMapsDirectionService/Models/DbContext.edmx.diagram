@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1d05858a86ec49a994cc94b0a7e62d43" Name="Diagram1" >
+        <EntityTypeShape EntityType="ProtektoTestModel.LocationPoint" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="ProtektoTestModel.RouteDetail" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="ProtektoTestModel.FK_RouteDetail_To_LocationPoint_Arrival" />
+        <AssociationConnector Association="ProtektoTestModel.FK_RouteDetail_To_LocationPoint_Departure" />
+        <EntityTypeShape EntityType="ProtektoTestModel.Route" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="ProtektoTestModel.ViewRoute" Width="1.5" PointX="2.75" PointY="4.75" />
+        <AssociationConnector Association="ProtektoTestModel.FK_RouteDetail_To_Route" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

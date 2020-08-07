@@ -1,0 +1,282 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Common.DataAccess</name>
+    </assembly>
+    <members>
+        <member name="T:AlbatrosSoft.Common.DataAccess.DbConnectionHelper">
+            <summary>
+            Expone toda la funcionalidad necesaria para comunicarse e interactuar con una base de datos.
+            </summary>
+        </member>
+        <member name="P:AlbatrosSoft.Common.DataAccess.DbConnectionHelper.ConnectionString">
+            <summary>
+            Cadena de conexion a la base de datos.
+            </summary>
+        </member>
+        <member name="P:AlbatrosSoft.Common.DataAccess.DbConnectionHelper.ProviderName">
+            <summary>
+            Nombre de conexion a base de datos.
+            </summary>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.DbConnectionHelper.#ctor(System.String,System.String)">
+            <summary>
+            Constructor que recibe por parametros, la cadena de conexion y el proveedor de 
+            conexion a la base de datos
+            </summary>
+            <param name="connectionString">Cadena de conexion</param>
+            <param name="providerName">Proveedor de conexion a base de datos</param>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.DbConnectionHelper.Dispose">
+            <summary>
+            Releases all resources used by an instance of the <see cref="T:AlbatrosSoft.Common.DataAccess.DbConnectionHelper" /> class.
+            </summary>
+            <remarks>
+            This method calls the virtual <see cref="M:AlbatrosSoft.Common.DataAccess.DbConnectionHelper.Dispose(System.Boolean)" /> method, passing in true, 
+            and then suppresses 
+            finalization of the instance.
+            </remarks>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.DbConnectionHelper.Finalize">
+            <summary>
+            Releases unmanaged resources before an instance of the <see cref="T:AlbatrosSoft.Common.DataAccess.DbConnectionHelper" /> 
+            class is reclaimed by garbage collection.
+            </summary>
+            <remarks>
+            NOTE: Leave out the finalizer altogether if this class doesn't 
+            own unmanaged resources itself, but leave the other methods
+            exactly as they are.
+            This method releases unmanaged resources by calling the virtual 
+            <see cref="M:AlbatrosSoft.Common.DataAccess.DbConnectionHelper.Dispose(System.Boolean)" /> method, passing in false.
+            </remarks>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.DbConnectionHelper.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by an instance of the 
+            <see cref="T:AlbatrosSoft.Common.DataAccess.DbConnectionHelper" /> class and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources;        
+            false to release only unmanaged resources.</param>
+        </member>
+        <member name="T:AlbatrosSoft.Common.DataAccess.DbParameterItem">
+            <summary>
+            Representa un parámetro de entrada o salida utilizado por una función o procedimiento almacenado 
+            alojado en una base de datos.
+            </summary>
+        </member>
+        <member name="P:AlbatrosSoft.Common.DataAccess.DbParameterItem.Name">
+            <summary>
+            Nombre
+            </summary>
+        </member>
+        <member name="P:AlbatrosSoft.Common.DataAccess.DbParameterItem.Type">
+            <summary>
+            Tipo
+            </summary>
+        </member>
+        <member name="P:AlbatrosSoft.Common.DataAccess.DbParameterItem.Direction">
+            <summary>
+            Direccion de parametro
+            </summary>
+        </member>
+        <member name="P:AlbatrosSoft.Common.DataAccess.DbParameterItem.Value">
+            <summary>
+            Valor
+            </summary>
+        </member>
+        <member name="P:AlbatrosSoft.Common.DataAccess.DbParameterItem.Size">
+            <summary>
+            Tamaño.
+            </summary>
+        </member>
+        <member name="T:AlbatrosSoft.Common.DataAccess.Extensions.DataExtensions">
+            <summary>
+            Contiene utilidades comunes para trabajar con objetos de acceso conectado y desconectado de ADO.NET.
+            </summary>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.Extensions.DataExtensions.HasData(System.Data.DataSet)">
+            <summary>
+            Determina si la instancia de un DataSet posee datos.
+            </summary>
+            <param name="ds">Instancia del DataSet a evaluar.</param>
+            <returns>true, si tiene al menos una tabla con datos, en caso contrario false.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.Extensions.DataExtensions.HasData(System.Data.DataTable)">
+            <summary>
+            Determina si la instancia de un DataTable posee datos.
+            </summary>
+            <param name="dt">Instancia del DataTable a evaluar.</param>
+            <returns>true, si tiene al menos una fila con datos, en caso contrario false.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.Extensions.DataExtensions.RenameColumns(System.Data.DataTable,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Permite renombrar las columnas de una tabla a partir de una lista de alias de nombres de columnas.
+            </summary>
+            <param name="dt">Instancia del DataTable.</param>
+            <param name="columnNames">Lista de columnas a renombrar en la tabla con sus alias (Name = Nombre Original, Value = Alias).</param>
+            <returns>Tabla con los nombres personalizados de columnas.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.Extensions.DataExtensions.ToDataTable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Convierte una Coleción a un DataTable.
+            </summary>
+            <typeparam name="T">Tipo de los elementos de la colección.</typeparam>
+            <param name="items">Colección de elementos.</param>
+            <returns>Datatable con los elementos de la colección.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.Extensions.DataExtensions.ToDataTable``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Convierte una Coleción a un DataTable.
+            </summary>
+            <typeparam name="T">Tipo de los elementos de la colección.</typeparam>
+            <param name="items">Colección de elementos.</param>
+            <param name="columnNames">Lista de propiedades con alias a incluir en la tabla.</param>
+            <returns>Datatable con los elementos de la colección.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.Extensions.DataExtensions.ToDataTable``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            Convierte una Coleción a un DataTable.
+            </summary>
+            <typeparam name="T">Tipo de los elementos de la colección.</typeparam>
+            <param name="items">Colección de elementos.</param>
+            <param name="columns">Nombre de propiedades a incluir en la tabla (Separadas por ,)</param>
+            <returns>Datatable con los elementos de la colección.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.Extensions.DataExtensions.ToDataTable``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{System.ComponentModel.PropertyDescriptor})">
+            <summary>
+            Convierte una Coleción a un DataTable.
+            </summary>
+            <typeparam name="T">Tipo de los elementos de la colección.</typeparam>
+            <param name="items">Colección de elementos.</param>
+            <param name="propertyColumns">Conjunto de propiedades a incluir en la tabla.</param>
+            <returns></returns>
+        </member>
+        <member name="T:AlbatrosSoft.Common.DataAccess.GenericRepository">
+            <summary>
+            Expone las funcionalidades básicas más comunes que se utilizan al interactuar con una base de datos
+            </summary>
+        </member>
+        <member name="F:AlbatrosSoft.Common.DataAccess.GenericRepository.dbHelper">
+            <summary>
+            Helper para conexion a base de datos.
+            </summary>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.GenericRepository.#ctor(System.String,System.String)">
+            <summary>
+            Constructor que recibe por parametros la cadena de conexion y 
+            el nombre de proveedor para la conexion a la base de datos
+            </summary>
+            <param name="connectionString">Cadena de conexion</param>
+            <param name="providerName">Proveedor de conexion a base de datos</param>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.GenericRepository.#ctor(AlbatrosSoft.Common.DataAccess.DbConnectionHelper)">
+            <summary>
+            Constructore que recibe por parametro un helper de conexion a base de datos
+            </summary>
+            <param name="dbHelper"></param>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.GenericRepository.GetData(System.String)">
+            <summary>
+            Ejecuta una consulta SQL contra una base de datos y devuelve los resultados obtenidos en forma de tabla.
+            </summary>
+            <param name="sql">Comando SQL a ejecutar.</param>
+            <returns>Resultados devueltos por la consulta en forma de tabla.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.GenericRepository.GetData(System.String,System.Collections.Generic.ICollection{AlbatrosSoft.Common.DataAccess.DbParameterItem})">
+            <summary>
+            Ejecuta un procedimiento almacenado que retorna datos y devuelve los resultados obtenidos en forma de tabla.
+            </summary>
+            <param name="procedureName">Nombre del procedimiento</param>
+            <param name="inputParameters">Parámetros de entrada del procedimiento (null indica sin parámetros).</param>
+            <returns>Resultados devueltos por el procedimiento en forma de tabla.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.GenericRepository.ExecuteNonQuery(System.String)">
+            <summary>
+            Ejecuta un comando sql de manipulación de datos y devuelve el número de filas afectadas tras la ejecución
+            del comando.
+            </summary>
+            <param name="sql">Comando SQL a ejecutar.</param>
+            <returns>Número de filas afectadas tras la ejecución del comando.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.GenericRepository.ExecuteNonQuery(System.String,System.Collections.Generic.ICollection{AlbatrosSoft.Common.DataAccess.DbParameterItem})">
+            <summary>
+            Ejecuta un procedimiento almacenado o función alojados en la base de datos de destino.
+            </summary>
+            <param name="procedureName">Nombre del procedimiento o función.</param>
+            <param name="inputParameters">Parámetros de entrada del procedimiento (null indica sin parámetros).</param>
+            <returns>Número de filas afectadas tras la ejecución del procedimiento almacenado o función.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.GenericRepository.ExecuteNonQuery(System.String,System.Collections.Generic.ICollection{AlbatrosSoft.Common.DataAccess.DbParameterItem},AlbatrosSoft.Common.DataAccess.DbParameterItem)">
+            <summary>
+            Ejecuta un procedimiento almacenado o función alojados en la base de datos de destino.
+            </summary>
+            <param name="procedureName">Nombre del procedimiento o función.</param>
+            <param name="inputParameters">Parámetros de entrada del procedimiento.</param>
+            <param name="outputParameter">Parámetro de salida principal (para el caso de procedimientos almacenados.)</param>
+            <returns>Número de filas afectadas tras la ejecución del procedimiento almacenado o función.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.GenericRepository.ExistsData(System.String)">
+            <summary>
+            Determina si existen datos que cumplen con los criterios de una consulta SQL.
+            </summary>
+            <param name="sql">Consulta SQL a evaluar.</param>
+            <returns>true, si existen datos que cumplen con la consulta, de lo contrario false.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.GenericRepository.GenerateAutonumber(System.String,System.String)">
+            <summary>
+            Permite generar un valor autonumerico dentro de una tabla de una base de datos conectada.
+            </summary>
+            <param name="field">Campo de la tabla.</param>
+            <param name="table">Nombre de la tabla.</param>
+            <returns>Nuevo valor autonumerico.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.GenericRepository.GenerateAutonumber(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Permite generar un valor autonumerico dentro de una tabla de una base de datos conectada para una condicion especifica.
+            </summary>
+            <param name="field">Campo de la tabla.</param>
+            <param name="table">Nombre de la tabla.</param>
+            <param name="mainField">Campo principal de la tabla.</param>
+            <param name="mainValue">Valor principal de la tabla.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.GenericRepository.GetAutonumber(System.String)">
+            <summary>
+            Devuelve valor incrementado de un campo autonumerico de una tabla.
+            </summary>
+            <param name="sql">Consulta para generacion del autonumerico.</param>
+            <returns>Valor incrementado para el campo autonumerico.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.GenericRepository.Dispose">
+            <summary>
+            Releases all resources used by an instance of the <see cref="T:AlbatrosSoft.Common.DataAccess.GenericRepository" /> class.
+            </summary>
+            <remarks>
+            This method calls the virtual <see cref="M:AlbatrosSoft.Common.DataAccess.GenericRepository.Dispose(System.Boolean)" /> method, passing in true, 
+            and then suppresses 
+            finalization of the instance.
+            </remarks>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.GenericRepository.Finalize">
+            <summary>
+            Releases unmanaged resources before an instance of the <see cref="T:AlbatrosSoft.Common.DataAccess.GenericRepository" /> 
+            class is reclaimed by garbage collection.
+            </summary>
+            <remarks>
+            NOTE: Leave out the finalizer altogether if this class doesn't 
+            own unmanaged resources itself, but leave the other methods
+            exactly as they are.
+            This method releases unmanaged resources by calling the virtual 
+            <see cref="M:AlbatrosSoft.Common.DataAccess.GenericRepository.Dispose(System.Boolean)" /> method, passing in false.
+            </remarks>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DataAccess.GenericRepository.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by an instance of the 
+            <see cref="T:AlbatrosSoft.Common.DataAccess.GenericRepository" /> class and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources;        
+            false to release only unmanaged resources.</param>
+        </member>
+    </members>
+</doc>

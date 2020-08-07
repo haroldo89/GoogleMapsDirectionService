@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Common.Web</name>
+    </assembly>
+    <members>
+        <member name="T:AlbatrosSoft.Common.Web.JsonHelper">
+            <summary>
+            Contiene la funcionalidad necesaria para serializar y deserializar objetos en formato Json.
+            </summary>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.JsonHelper.Serialize``1(``0)">
+            <summary>
+            Obtiene la representación en formato JSON de la información de un objeto.
+            </summary>
+            <typeparam name="T">Tipo concreto del objeto a serializar.</typeparam>
+            <param name="element">Instancia de objeto a serializar.</param>
+            <returns>Cadena en formato JSON que representa al objeto serializado.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.JsonHelper.Deserialize``1(System.String)">
+            <summary>
+            Reconstruye un objeto desde una cadena en formato JSON.
+            </summary>
+            <typeparam name="T">Tipo concreto del objeto a deserializar.</typeparam>
+            <param name="jsonText">Cadena en formato JSON que representa al objeto serializado.</param>
+            <returns>Instancia del objeto deserializado.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.JsonHelper.ConvertJsonDateToDateString(System.Text.RegularExpressions.Match)">
+            <summary>
+            Convierte fecha de string Serializado
+            </summary>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.JsonHelper.ConvertDateStringToJsonDate(System.Text.RegularExpressions.Match)">
+            <summary>
+            Convierte fecha formato string a formato fecha JSon
+            </summary>
+        </member>
+        <member name="T:AlbatrosSoft.Common.Web.SortingHelper`1">
+            <summary>
+            Contiene operaciones para trabajar con expresiones de ordenamiento de datos para colecciones.
+            </summary>
+            <typeparam name="T">Tipo de dato concreto de los elementos de la colección.</typeparam>
+        </member>
+        <member name="F:AlbatrosSoft.Common.Web.SortingHelper`1.ASCENDING_DIRECTION">
+            <summary>
+            Dirección ascendente.
+            </summary>
+        </member>
+        <member name="F:AlbatrosSoft.Common.Web.SortingHelper`1.DESCENDING_DIRECTION">
+            <summary>
+            Dirección descendente.
+            </summary>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.SortingHelper`1.SortBy(System.Collections.Generic.IEnumerable{`0},System.String,System.String)">
+            <summary>
+            Permite realizar el ordenamiento de los elementos de una colección de acuerdo a la expresión de ordenamiento y la dirección indicada (ASC, DESC).
+            </summary>
+            <param name="dataSource">Colección de elementos a ordenar.</param>
+            <param name="sortExpressionString">Expresión o campo de ordenamiento.</param>
+            <param name="sortDirection">Dirección del ordenamiento (ASC, DESC).</param>
+            <returns>Colección de elementos ordenada de acuerdo a los criterios especificados.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.SortingHelper`1.GetExpression``1(System.String)">
+            <summary>
+            Obtiene la expresión de predicado que corresponde a un criterio o campo de ordenamiento.
+            </summary>
+            <typeparam name="TParam">Tipo concreto de los elementos de la colección a ordenar.</typeparam>
+            <param name="sortExpressionString">Expresión o campo de ordenamiento.</param>
+            <returns>Expresión de predicado de ordenamiento.</returns>
+        </member>
+        <member name="T:AlbatrosSoft.Common.Web.WebUtils">
+            <summary>
+            Utilidades para proyectos web.
+            </summary>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.WebUtils.GetMachineNetworkAddress">
+            <summary>
+            Devuelve la dirección IP version 4.0 correspondiente a un equipo local.
+            </summary>
+            <returns>Dirección de red interna del equipo local.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.WebUtils.GetExternalAddress">
+            <summary>
+            Obtiene la dirección IP externa a través de la cual proviene una solicitud hacia el servidor web.
+            </summary>
+            <returns>Dirección IP externa desde donde se origina una solicitud web.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.WebUtils.SortDataTable(System.Data.DataTable,System.String,System.String)">
+            <summary>
+            Permite ordenar los datos de un objeto DataTable de acuerdo a la expresión y direccion indicadas.
+            </summary>
+            <param name="dt">Objeto de tipo DataTable a ordenar.</param>
+            <param name="sortExpression">Expresion de ordenamiento.</param>
+            <param name="sortDirection">Dirección del ordenamiento (ASC, DESC).</param>
+            <returns>Conjunto de datos organizados de acuerdo a los criterios especificados.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.WebUtils.ExportToSpreadsheet(System.Data.DataTable,System.String,System.Web.HttpContext)">
+            <summary>
+            Permite exportar un objeto DataTable a un archivo de hoja de cálculo de Excel.
+            </summary>
+            <param name="table">Instancia del DataTable.</param>
+            <param name="fileName">Nombre del archivo de destino.</param>
+            <param name="context">Contexto Http del servidor web.</param>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.WebUtils.GetCellValue(System.Object)">
+            <summary>
+            Permite obtener el valor de una celda de Excel con formato
+            </summary>
+            <param name="inputValue">Valor de celda</param>
+            <returns></returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.WebUtils.ExportToFlatSpreadsheet(System.Data.DataTable,System.String,System.Web.HttpContext)">
+            <summary>
+            Permite exportar un objeto DataTable a un archivo de hoja de cálculo sin formato de Excel.
+            </summary>
+            <param name="table">Instancia del DataTable.</param>
+            <param name="fileName">Nombre del archivo de destino.</param>
+            <param name="context">Contexto Http del servidor web.</param>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.WebUtils.CloseSession(System.Web.HttpContext)">
+            <summary>
+            Cierra la sesión actual de una aplicación web y libera todos los recursos asociados a la misma.
+            </summary>
+            <param name="currentContext">Contexto HTTP de la aplicación web.</param>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.WebUtils.DeleteCache(System.Web.HttpContext)">
+            <summary>
+            Libera los recursos asociados a Cache de una aplicación Web.
+            </summary>
+            <param name="currentContext">Contexto HTTP de la aplicación web.</param>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.WebUtils.WriteLineInPage(System.String,System.Web.UI.Page)">
+            <summary>
+            Imprime una linea de texto en una pagina del servidor web
+            </summary>
+            <param name="line">Linea de texto a imprimir</param>
+            <param name="page">Instancia de la página en el servidor.</param>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.WebUtils.ShowMessageDialog(System.String,System.Web.UI.Page)">
+            <summary>
+            Muestra un mensaje de dialogo dentro de una página web.
+            </summary>
+            <param name="message">Mensaje a mostrar.</param>
+            <param name="page">Instancia de la página en el servidor.</param>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.WebUtils.ShowMessageDialog(System.String,System.Web.UI.Control)">
+            <summary>
+            Muestra un mensaje de dialogo dentro de un control de tipo contenedor.
+            </summary>
+            <param name="message">Mensaje a mostrar.</param>
+            <param name="container">Control contenedor desde donde se mostrará el mensaje (ej. UpdatePanel)</param>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Web.WebUtils.ClearControls(System.Web.UI.ControlCollection)">
+            <summary>
+            Permite limpiar los controles de una página.
+            </summary>
+            <param name="controls">Coleccion de controles de la página.</param>
+        </member>
+    </members>
+</doc>

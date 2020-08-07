@@ -1,0 +1,536 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Common</name>
+    </assembly>
+    <members>
+        <member name="T:AlbatrosSoft.Common.CommonUtils">
+            <summary>
+            Utilidades comunes
+            </summary>
+        </member>
+        <member name="M:AlbatrosSoft.Common.CommonUtils.GetAppVersion">
+            <summary>
+            Devuelve la versión del ensamblado principal del sistema que se encuentra en ejecución.
+            </summary>
+            <returns>Version del ensamblado ejecutable del sistema.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.CommonUtils.GetAssemblyVersion(System.Type)">
+            <summary>
+            /// Devuelve la versión del ensamblado en donde se encuentra definido el tipo especificado.
+            </summary>
+            <param name="innerType">Tipo a evaluar.</param>
+            <returns>Version del ensamblado del tipo indicado.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.CommonUtils.GetAssemblyVersion(System.Reflection.Assembly)">
+            <summary>
+            Devuelve la versión de un ensamblado especificado.
+            </summary>
+            <param name="assembly">Instancia del ensamblado a evaluar.</param>
+            <returns>Versión del ensamblado.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.CommonUtils.GetCurrentDate">
+            <summary>
+            Obtiene la fecha actual del sistema local.
+            </summary>
+            <returns>Fecha actual del sistema local.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.CommonUtils.GetLocalDate(System.Double)">
+            <summary>
+            Obtiene la fecha actual del sistema local.
+            </summary>
+            <param name="timeOffset">Cantidad de horas a adicionar o restar a la fecha/hora UTC.</param>
+            <returns>Fecha actual del sistema local.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.CommonUtils.TruncDate(System.DateTime)">
+            <summary>
+            Devuelve la fecha especificada sin el componente de hora.
+            </summary>
+            <param name="source">Fecha a truncar</param>
+            <returns>Valor de fecha sin el componente hora.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.CommonUtils.GetErrorDetail(System.Exception)">
+            <summary>
+            Obtiene el detalle de error de una excepcion.
+            </summary>
+            <param name="exc">Instancia de la excepcion.</param>
+            <returns>Detalle de error de la excepcion.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.CommonUtils.GetErrorDetail(System.Exception,System.String)">
+            <summary>
+            Obtiene el detalle de error de una excepcion.
+            </summary>
+            <param name="exc">Instancia de la excepcion.</param>
+            <param name="messagePrefix">Prefijo para el mensaje de error.</param>
+            <returns>Detalle de error de la excepcion.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.CommonUtils.GetErrorDetail(System.Exception,System.Boolean)">
+            <summary>
+             Obtiene el detalle de error de una excepcion.
+            </summary>
+            <param name="exc">Instancia de la excepcion.</param>
+            <param name="includeDetail">Indica si se incluye o no el detalle de la excepcion</param>
+            <returns>Detalle de error de la excepcion.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.CommonUtils.GetErrorDetail(System.Exception,System.Boolean,System.String)">
+            <summary>
+             Obtiene el detalle de error de una excepcion.
+            </summary>
+            <param name="exc">Instancia de la excepcion.</param>
+            <param name="includeDetail">Indica si se incluye o no el detalle de la excepcion</param>
+            <param name="errorPrefix">Prefijo para el mensaje de error.</param>
+            <returns>Detalle de error de la excepcion.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.CommonUtils.DeserializeXmlString(System.String,System.Type)">
+            <summary>
+            Reconstruye un objeto desde una cadena en formato XML.
+            </summary>
+            <param name="data">Texto en formato xml.</param>
+            <param name="objecType">Tipo del objeto de retorno.</param>
+            <returns>Objeto deserializado.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.CommonUtils.SerializeObjectAsXml(System.Object)">
+            <summary>
+            Serializa un objeto determinado en una cadena XML.
+            </summary>
+            <param name="instance">Objeto a serializar.</param>
+            <returns>Cadena XML correspondiente al objeto serializado.</returns>
+        </member>
+        <member name="T:AlbatrosSoft.Common.Contracts.ILogger">
+            <summary>
+            Expone la funcionalidad necesaria para realizar instrumentación de eventos y registro
+            de errores de una aplicación.
+            </summary>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Contracts.ILogger.WriteLog(System.String,System.String)">
+            <summary>
+            Permite escribir una entrada de registro de evento de aplicación.
+            </summary>
+            <param name="message">Mensaje con el detalle del evento.</param>
+            <param name="category">Categoría del evento.</param>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Contracts.ILogger.WriteErrorLog(System.String,System.String,System.Int32)">
+            <summary>
+            Permite escribir una entrada de registro de error de aplicación.
+            </summary>
+            <param name="errorMessage">Mensaje con el detalle del error.</param>
+            <param name="category">Categoría del error.</param>
+            <param name="severiryLevel">Nivel de severidad del error.</param>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Contracts.ILogger.WriteErrorLog(System.String,System.String,System.Int32,System.Exception,System.Boolean)">
+            <summary>
+            Permite escribir una entrada de registro de error de aplicación.
+            </summary>
+            <param name="errorMessage">Mensaje con el detalle del error.</param>
+            <param name="category">Categoría del error.</param>
+            <param name="severiryLevel">Nivel de severidad del error.</param>
+            <param name="innerException">Instancia del error interno generado.</param>
+            <param name="includeErrorDetail">Indica si se incluye el detalle de error en el contenido del mensaje de error.</param>
+        </member>
+        <member name="T:AlbatrosSoft.Common.Contracts.IRepository`1">
+            <summary>
+            Expone la funcionalidad base de un repositorio de objetos que ofrece servicios básicos de lectura y escritura sobre un medio de persistencia.
+            </summary>
+            <typeparam name="TEntity">Tipo concreto de objetos a manipular.</typeparam>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Contracts.IRepository`1.Add(`0)">
+            <summary>
+            Adiciona el objeto especificado al almacén de datos.
+            </summary>
+            <param name="entity">Instancia del objeto a guardar.</param>
+            <returns>Mensaje de resultado de la operación (Vacío = Operación Exitosa).</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Contracts.IRepository`1.Update(`0)">
+            <summary>
+            Persiste los cambios realizados al objeto indicado en el almacén de datos.
+            </summary>
+            <param name="entity">Instancia del objeto a guardar.</param>
+            <returns>Mensaje de resultado de la operación (Vacío = Operación Exitosa).</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.Contracts.IRepository`1.Remove(`0)">
+            <summary>
+            Ejecuta la operación de eliminación del objeto indicado en el almacén de datos.
+            </summary>
+            <param name="entity">Instancia del objeto a eliminar.</param>
+            <returns>Mensaje de resultado de la operación (Vacío = Operación Exitosa).</returns>
+        </member>
+        <member name="T:AlbatrosSoft.Common.ConvertFunctions">
+            <summary>
+            Funciones de conversion.
+            </summary>
+        </member>
+        <member name="M:AlbatrosSoft.Common.ConvertFunctions.ReturnEmptyIfNull(System.Object)">
+            <summary>
+            Deveolver vacio si es nulo
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.ConvertFunctions.ReturnZeroIfNull(System.Object)">
+            <summary>
+            Devolver cero si es nulo
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.ConvertFunctions.ReturnDateTimeMinIfNull(System.Object)">
+            <summary>
+            Devolver fecha minima si es nulo
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AlbatrosSoft.Common.DateTimeExtensions">
+            <summary>
+            Extensiones para fechas.
+            </summary>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DateTimeExtensions.GetWeek(System.DateTime,System.Globalization.CultureInfo,System.DateTime@,System.DateTime@)">
+            <summary>
+            Obtener rango de semana apartir de una fecha especificada, siendo el domingo el primer dia de la semana 
+            y el sabado el ultimo dia de la semana.
+            </summary>
+            <param name="date">Fecha</param>
+            <param name="cultureInfo">Informacion de cultura</param>
+            <param name="startWeekDate">Primer dia de la semana(parametro de salida)</param>
+            <param name="endWeekDate">Ultimo de la semana (parametro de salida)</param>
+        </member>
+        <member name="M:AlbatrosSoft.Common.DateTimeExtensions.GetMonth(System.DateTime,System.DateTime@,System.DateTime@)">
+            <summary>
+            Obtener rango de mes apartir de una fecha especificada.
+            </summary>
+            <param name="date">Fecha.</param>
+            <param name="startMonthDate">Fecha inicial del rango de fechas(parametro de salida).</param>
+            <param name="endMonthDate">Fecha final del rango de fechas(parametro de salida).</param>
+        </member>
+        <member name="T:AlbatrosSoft.Common.DistanceUnit">
+            <summary>
+            Representa una unidad de medición de distancia.
+            </summary>
+        </member>
+        <member name="F:AlbatrosSoft.Common.DistanceUnit.Kilometers">
+            <summary>
+            Kilómetros (km).
+            </summary>
+        </member>
+        <member name="F:AlbatrosSoft.Common.DistanceUnit.Meters">
+            <summary>
+            Metros (mts).
+            </summary>
+        </member>
+        <member name="F:AlbatrosSoft.Common.DistanceUnit.Miles">
+            <summary>
+            Millas (mi).
+            </summary>
+        </member>
+        <member name="F:AlbatrosSoft.Common.DistanceUnit.Knots">
+            <summary>
+            Nudos (knots).
+            </summary>
+        </member>
+        <member name="T:AlbatrosSoft.Common.ErrorSeverity">
+            <summary>
+            Agrupa y establece los niveles de severidad de error de una aplicación.
+            </summary>
+        </member>
+        <member name="F:AlbatrosSoft.Common.ErrorSeverity.LOW">
+            <summary>
+            Nivel de gravedad de error menor.
+            </summary>
+        </member>
+        <member name="F:AlbatrosSoft.Common.ErrorSeverity.MEDIUM">
+            <summary>
+            Nivel de gravedad de error intermedio.
+            </summary>
+        </member>
+        <member name="F:AlbatrosSoft.Common.ErrorSeverity.HIGH">
+            <summary>
+            Nivel de gravedad de error alto.
+            </summary>
+        </member>
+        <member name="F:AlbatrosSoft.Common.ErrorSeverity.CRITICAL">
+            <summary>
+            Nivel de gravedad de error mayor.
+            </summary>
+        </member>
+        <member name="T:AlbatrosSoft.Common.FilterHelper`1">
+            <summary>
+            Contiene operaciones para trabajar con expresiones de filtrado de datos para colecciones.
+            </summary>
+            <typeparam name="T">Tipo de dato concreto de los elementos de la colección.</typeparam>
+        </member>
+        <member name="M:AlbatrosSoft.Common.FilterHelper`1.AddFilterExpression(System.Func{`0,System.Boolean},System.Func{`0,System.Boolean})">
+            <summary>
+            Permite agregar un criterio de búsqueda de datos a una expresion de filtrado existente.
+            </summary>
+            <param name="currentFilterExpression">Expresion lambda que representa una condicion de filtrado.</param>
+            <param name="newFilterExpression">Expresion lambda que representa un criterio de filtrado.</param>
+            <returns>Expresion lambda resultante con los criterios de filtrado.</returns>
+        </member>
+        <member name="T:AlbatrosSoft.Common.GeneralUtils">
+            <summary>
+            Utilidades generales
+            </summary>
+        </member>
+        <member name="M:AlbatrosSoft.Common.GeneralUtils.CreateDefaultItem">
+            <summary>
+            Crear item por defecto
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.GeneralUtils.CreateDefaultItem(System.String)">
+            <summary>
+            Crear item por defecto con texto establecido.
+            </summary>
+            <param name="displayText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.GeneralUtils.ToNullableInt32(System.String)">
+            <summary>
+            Devuelve un valor entero o un valor nulo si la cadena de caracteres es vacia
+            </summary>
+            <param name="numberText">cadena de caracteres</param>
+            <returns></returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.GeneralUtils.JoinDateTime(System.String,System.String)">
+            <summary>
+            Une los valores de una fecha y hora separados en un solo elemento.
+            </summary>
+            <param name="date">Valor de fecha</param>
+            <param name="hour">Valor de hora</param>
+            <returns></returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.GeneralUtils.GetCurrentTimestampString">
+            <summary>
+            Obtener fecha actual en formato texto.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.GeneralUtils.GetChartTitleSvgElement(System.String)">
+            <summary>
+            Generar string de titulo para la grafica svg
+            </summary>
+            <param name="chartTitle">Titulo</param>
+            <returns></returns>
+        </member>
+        <member name="T:AlbatrosSoft.Common.LinqExtensions">
+            <summary>
+            Funciones de extension para linq.
+            </summary>
+        </member>
+        <member name="M:AlbatrosSoft.Common.LinqExtensions.DistinctBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            Funcion distinct para listas por campo especifico.
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <param name="source"></param>
+            <param name="keySelector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.LinqExtensions.In``1(``0,``0[])">
+            <summary>
+            Funcion IN en linq
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.LinqExtensions.ToList``1(System.Data.DataTable)">
+            <summary>
+            Converts datatable to list dynamically
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataTable"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AlbatrosSoft.Common.Models.SelectListItem">
+            <summary>
+            Items de lista desplegable.
+            </summary>
+        </member>
+        <member name="P:AlbatrosSoft.Common.Models.SelectListItem.Text">
+            <summary>
+            Texto
+            </summary>
+        </member>
+        <member name="P:AlbatrosSoft.Common.Models.SelectListItem.Value">
+            <summary>
+            Valor
+            </summary>
+        </member>
+        <member name="P:AlbatrosSoft.Common.Models.SelectListItem.Selected">
+            <summary>
+            Item seleccionado
+            </summary>
+        </member>
+        <member name="T:AlbatrosSoft.Common.StringUtils">
+            <summary>
+            Agrupa un conjunto de utilidades comunes para trabajar con cadenas de texto.
+            </summary>
+        </member>
+        <member name="M:AlbatrosSoft.Common.StringUtils.InQuotes(System.String)">
+            <summary>
+            Devuelve una cadena de entrada encerrada en comillas dobles.
+            </summary>
+            <param name="input">Cadena de entrada.</param>
+            <returns>Texto encerrado entre comillas dobles.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.StringUtils.InSingleQuotes(System.String)">
+            <summary>
+            Devuelve una cadena de entrada encerrada en comillas sencillas.
+            </summary>
+            <param name="input">Cadena de entrada.</param>
+            <returns>Texto encerrado entre comillas sencillas.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.StringUtils.ToFormatString(System.String)">
+            <summary>
+            Convierte una cadena de formato a una expresion de formato.
+            </summary>
+            <param name="format">Cadena de entrada con el formato.</param>
+            <returns>Expresión del formato.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.StringUtils.ToDoubleString(System.Double)">
+            <summary>
+            Transforma un valor numérico flotante de doble precisión al formato de cadena de texto independiente de la cultura.
+            </summary>
+            <param name="value">Valor numérico a transformar.</param>
+            <returns>Representación en formato de texto.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.StringUtils.GetStringInBetween(System.String,System.String,System.String)">
+            <summary>
+            Extrae el texto localizado en el medio de dos cadenas de texto.
+            </summary>
+            <param name="beginString">Cadena de texto inicial</param>
+            <param name="endString">Cadena de texto final</param>
+            <param name="sourceString">Texto de origen</param>
+            <returns>Texto contenido entre las dos cadenas.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.StringUtils.GetStringInBetween(System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Extrae el texto localizado en el medio de dos cadenas de texto.
+            </summary>
+            <param name="beginString">Cadena de texto inicial</param>
+            <param name="endString">Cadena de texto final</param>
+            <param name="sourceString">Texto de origen</param>
+            <param name="includeBegin">Valor que indica si se incluye la cadena de inicio</param>
+            <param name="includeEnd">Valor que indica si se incluye la cadena de fin</param>
+            <returns>Texto contenido entre las dos cadenas.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.StringUtils.IsValidEmail(System.String)">
+            <summary>
+            Determina si una cadena de texto coresponde a una direccion de correo electrónico válida.
+            </summary>
+            <param name="mail">Cadena de texto a validar.</param>
+            <returns>true, si es una direccion de correo válida, de lo contrario false.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.StringUtils.IsNumeric(System.String)">
+            <summary>
+            Determina si una cadena de texto corresponde a un valor numérico.
+            </summary>
+            <param name="inputString">Cadena de texto a validar.</param>
+            <returns>true, si el valor es numérico, de lo contrario false.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.StringUtils.IsSafePassword(System.String,System.Int32,System.String@)">
+            <summary>
+            Determina si una cadena de entrada es una clave segura.
+            </summary>
+            <param name="passwordValue">Valor de clave a validar.</param>
+            <param name="passwordMinLength">Longitud de la clave.</param>
+            <param name="errorMessage">Mensaje con el resultado de la validación.</param>
+            <returns>true si la clave es segura, en caso contrario false.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.StringUtils.IsSafePassword(System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.String@)">
+            <summary>
+            Determina si una cadena de entrada es una clave segura.
+            </summary>
+            <param name="passwordValue">Valor de clave a validar.</param>
+            <param name="passwordMinLength">Longitud de la clave.</param>
+            <param name="passwordMinUpper">Numero mínimo de mayúsculas que debe tener la clave.</param>
+            <param name="passwordMinLower">Numero mínimo de minúsculas que debe tener la clave.</param>
+            <param name="passwordMinNumbers">Numero mínimo de dígitos que debe tener la clave.</param>
+            <param name="passwordMinSpecialChars">Numero mínimo de carácters especiales que debe tener la clave.</param>
+            <param name="errorMessage">Mensaje con el resultado de la validación.</param>
+            <returns>true si la clave es segura, en caso contrario false.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.StringUtils.GenerateRandomPassword(System.Int32)">
+            <summary>
+            Permite generar un password de manera aleatoria.
+            //TODO: Mejorar el algoritmo de generacion.
+            </summary>
+            <param name="passwordLength">Longitud del Password a generar</param>
+            <returns></returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.StringUtils.IsValidAddress(System.String)">
+            <summary>
+            Es un correo valido.
+            </summary>
+            <param name="ipAddress">Direccion.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.StringUtils.FillString(System.String,System.String,System.Int32,System.Boolean)">
+            <summary>
+            Rellena una cadena de caracteres de longitud fija con un caracter de relleno específico
+            y los datos de origen a rellenar indicados.
+            </summary>
+            <param name="fillChar">Carácter de relleno.</param>
+            <param name="data">Cadena de origen a rellenar.</param>
+            <param name="dataToFillLenght">Longitud de la cadena final.</param>
+            <param name="fillLeft">Indicador de relleno ai inicio o al final de la cadena.</param>
+            <returns></returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.StringUtils.RemoveChartAccents(System.String)">
+            <summary>
+            Remueve los acentos de un texto.
+            </summary>
+            <param name="inputString">Valor a cambiar</param>
+            <returns></returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.StringUtils.ReplaceCharsWithHTMLCodes(System.String)">
+            <summary>
+            Reemplaza el un texto con los correspondientes valores de los acentos.
+            </summary>
+            <param name="inputString">Valor a cambiar.</param>
+            <returns></returns>
+        </member>
+        <member name="T:AlbatrosSoft.Common.UnitConverter">
+            <summary>
+            Contiene una serie de utilidades para realizar conversion de unidades de medida
+            entre diferentes magnitudes.
+            </summary>
+        </member>
+        <member name="F:AlbatrosSoft.Common.UnitConverter.EARTH_RADIUS_IN_KILOMETERS">
+            <summary>
+            Radio de la tierra (km)
+            </summary>
+        </member>
+        <member name="F:AlbatrosSoft.Common.UnitConverter.EARTH_RADIUS_IN_MILES">
+            <summary>
+            Radio de la tierra (mi)
+            </summary>
+        </member>
+        <member name="M:AlbatrosSoft.Common.UnitConverter.ToRadian(System.Double)">
+            <summary>
+            Convierte un valor dado de grados a radianes.
+            </summary>
+            <param name="degreesVaule">Valor a convertir en grados.</param>
+            <returns>Valor equivalente en radianes.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.UnitConverter.ToDegrees(System.Double)">
+            <summary>
+            Convierte un valor dado de radianes a grados.
+            </summary>
+            <param name="radiansValue">Valor a convertir en radianes.</param>
+            <returns>Valor equivalente en grados.</returns>
+        </member>
+        <member name="M:AlbatrosSoft.Common.UnitConverter.ToKilometers(System.Double,AlbatrosSoft.Common.DistanceUnit)">
+            <summary>
+            Convierte a Kilómetros una cantidad dada en la unidad de medida especificada.
+            </summary>
+            <param name="value">Cantidad a convertir</param>
+            <param name="sourceUnit">Unidad de medida de al cantidad dada.</param>
+            <returns>Valor equivalente en Kilómetros.</returns>
+        </member>
+    </members>
+</doc>

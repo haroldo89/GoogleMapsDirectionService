@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Google Maps - Servicio de Direcciones.</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Scripts/validationEngine/validationEngine.jquery.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui-1.10.3.css" rel="stylesheet" />
+    <link href="~/Scripts/jtable/themes/metro/blue/jtable.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript" src="~/Scripts/jquery-2.2.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-ui-1.11.4.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jtable/jquery.jtable.js")"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/validationEngine/jquery.validationEngine.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/validationEngine/jquery.validationEngine-languageSettings.js")"></script>
+    <script src="~/Scripts/CustomControls/CommonUtils.js"></script>
+    <script src="~/Scripts/CustomControls/LayoutHelper.js"></script>
+    <script type="text/javascript" src="~/Scripts/BlockUI.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <meta name="description" content="pagina de pruebas" />
+</head>
+<body>
+    @Html.Partial("~/Views/Shared/_Header.cshtml")
+    @RenderBody()
+    @RenderSection("scripts", required: false)
+</body>
+</html>

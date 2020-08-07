@@ -1,0 +1,88 @@
+﻿<style>
+    #divRouteContainer {
+        font: 11pt Calibri;
+    }
+
+    .jtable-dialog-form {
+        width: 350px;
+    }
+
+        .jtable-dialog-form input[type="checkbox"] {
+            width: auto;
+        }
+
+        .jtable-dialog-form select {
+            width: 200px;
+        }
+
+    div.jtable-main-container > table.jtable > thead th.jtable-column-header-sortable div.jtable-column-header-container {
+        height: auto;
+    }
+
+    button, input, optgroup, select, textarea {
+        color: black;
+    }
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALkZJIHgyhQHkSj_tFsqby8M6V_XWk0sI&libraries=geometry"></script>
+<script src="~/Scripts/CustomControls/epolys.js"></script>
+<script src="~/Scripts/CustomControls/GoogleMapsDistanceHelper.js"></script>
+<script src="~/Scripts/CustomControls/GoogleMapsHelper.js"></script>
+<script src="~/Scripts/Views/Route/Index.js"></script>
+
+<script type="text/javascript">
+    $(window).load(function () { $("#spinner").fadeOut("slow"); })
+    $(document).ready(function () {
+        var listCmd = '@this.Url.Action("GetRoutes", "Route")';
+        var deleteCmd = '@this.Url.Action("DeleteRoute", "Route")';
+        var updateCmd = '@this.Url.Action("UpdateRoute", "Route")';
+        var createCmd = '@this.Url.Action("CreateRoute", "Route")';
+        RouteIndex.initializeComponents(listCmd, deleteCmd, updateCmd, createCmd);
+        $("#ulHeaderMenu > li").removeClass("active");
+        $("#lnkRoute").addClass('active');
+    });
+</script>
+<h2 style="text-align:center; background:blue;font: bold 20px Calibri; color:white;">Tipos de Identificaciont</h2>
+<div id="spinner" style="width: 100%">
+</div>
+<div id="divRouteContainer">
+    @using (Html.BeginForm("Index", "Route", FormMethod.Post, new { id = "formRoute" }))
+    {
+        <div style="text-align: center; background: #f2ecec; height: auto; padding-right: 5px;">
+            <br />
+            <table style="margin: auto; padding-top: 10px;">
+                <tr>
+                    <td style="text-align: left;">
+                        <div class="">
+                            <input id="txtName" name="txtName" placeholder="Nombre" type="text"
+                                   class="input" style="height:25px;" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <table style="margin: auto;">
+                <tr>
+                    <td>
+                        <input type="submit" id="btnSearch" value="Buscar" class="input button" />
+                        <input type="submit" id="btnNewSearch" value="Nueva Busqueda" class="input button" />
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <table style="margin: auto;">
+                <tr>
+                    <td>
+                        <label id="lblMessage" class="SucessMessage" style="display: none"></label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    }
+    <div id="divRouteTableContainer" style="background-color: aquamarine;">
+        <div id="divRouteTableContainerValue"></div>
+    </div>
+</div>
+
+<div id="divDialogMap" style="display:none;">
+    <div id="divDialogContentMap" style="width: 420px; height: 400px;"></div>
+</div>
